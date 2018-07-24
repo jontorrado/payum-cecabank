@@ -1,0 +1,41 @@
+{
+    "name": "jontorrado/payum-cecabank",
+    "type": "project",
+    "description": "Payum extension for Cecabank payments",
+    "keywords": ["payment", "payum", "cecabank"],
+    "homepage": "https://payum.forma-pro.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kotlyar Maksim",
+            "email": "kotlyar.maksim@gmail.com"
+        },
+        {
+            "name":     "Payum project",
+            "homepage": "https://payum.forma-pro.com/"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "https://github.com/jontorrado/payum-cecabank/contributors"
+        }
+    ],
+    "require": {
+        "payum/core": "^1.5"
+    },
+    "require-dev": {
+        "payum/core": "^1.5@dev",
+        "php-http/guzzle6-adapter": "^1.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "JonTorrado\\Payum\\Cecabank": "" }
+    },
+    "target-dir": "JonTorrado/Payum/Cecabank",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.5-dev"
+        }
+    }
+}

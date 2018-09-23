@@ -60,10 +60,72 @@ class Api
     /**
      * @return string
      */
-    protected function getApiEndpoint()
+    public function getApiEndpoint()
     {
         return $this->options['sandbox']
             ? 'http://tpv.ceca.es:8000/cgi-bin/tpv'
             : 'https://pgw.ceca.es/cgi-bin/tpv';
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantId()
+    {
+        return $this->options['merchant_id'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAcquirerBin()
+    {
+        return $this->options['acquirer_bin'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getTerminalId()
+    {
+        return $this->options['terminal'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrencyType()
+    {
+        return 978; // EUR
+    }
+
+    /**
+     * Sing request sent to Gateway
+     *
+     * @param array $params
+     *
+     * @return string
+     */
+    public function sign(array $params)
+    {
+        $sign = '';
+
+        $signString = $this->options['secret_key'] .
+            $this->options['merchant_id'] .
+            $this->options['acquirer_bin'] .
+            $this->options['terminal'] .
+            $params['Num_operacion'] .
+            $params['Importe'] .
+            $params['TipoMoneda'] .
+            $params['Exponente'] .
+            $params['Cifrado'] .
+            $params['URL_OK'] .
+            $params['URL_NOK'];
+
+        if (strlen(trim($signString)) > 0) {
+            $sign = strtolower(hash('sha256', $signString));
+        }
+
+        return $sign;
     }
 }

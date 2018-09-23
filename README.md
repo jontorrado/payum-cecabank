@@ -3,6 +3,8 @@
 The Payum Cecabank gateway.
 
 ```
+WIP: This project is not done
+If you are willing to continue, feel free to fork this repo
 Documentation not done yet
 ```
 

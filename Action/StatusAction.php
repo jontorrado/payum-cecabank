@@ -19,7 +19,19 @@ class StatusAction implements ActionInterface
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
-        throw new \LogicException('Not implemented');
+        if (null == $model['Referencia']) {
+            $request->markNew();
+
+            return;
+        }
+
+        if (isset($model['COD_AUT']) && $model['COD_AUT'] !== "000") {
+            $request->markFailed();
+
+            return;
+        }
+
+        $request->markUnknown();
     }
 
     /**

@@ -21,6 +21,7 @@ class NotifyAction implements ActionInterface
         RequestNotSupportedException::assertSupports($this, $request);
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
+        dump($model);die;
 
         throw new \LogicException('Not implemented');
     }

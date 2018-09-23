@@ -32,15 +32,27 @@ class CecabankGatewayFactory extends GatewayFactory
 
         if (false == $config['payum.api']) {
             $config['payum.default_options'] = array(
-                'sandbox' => true,
+                'merchant_id'  => '',
+                'acquirer_bin' => '',
+                'terminal'     => '',
+                'secret_key'   => '',
+                'sandbox'      => true,
             );
             $config->defaults($config['payum.default_options']);
-            $config['payum.required_options'] = [];
+            $config['payum.required_options'] = array('merchant_id', 'acquirer_bin', 'terminal', 'secret_key');
 
             $config['payum.api'] = function (ArrayObject $config) {
                 $config->validateNotEmpty($config['payum.required_options']);
 
-                return new Api((array) $config, $config['payum.http_client'], $config['httplug.message_factory']);
+                $cecaConfig = array(
+                    'merchant_id'  => $config['merchant_id'],
+                    'acquirer_bin' => $config['acquirer_bin'],
+                    'terminal'     => $config['terminal'],
+                    'secret_key'   => $config['secret_key'],
+                    'sandbox'      => $config['sandbox'],
+                );
+
+                return new Api((array) $cecaConfig, $config['payum.http_client'], $config['httplug.message_factory']);
             };
         }
     }
